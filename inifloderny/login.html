@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MedCatalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/login.css">
+</head>
+<body>
+    <?php
+    // Handle logout message at the top of the file
+    session_start();
+    $logoutMessage = '';
+    if (isset($_SESSION['logout_message'])) {
+        $logoutMessage = $_SESSION['logout_message'];
+        unset($_SESSION['logout_message']);
+    }
+    ?>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    🏥 MedCatalog
+                </div>
+                <h1>Masuk ke Akun Anda</h1>
+                <p>Silakan masukkan kredensial Anda untuk melanjutkan</p>
+            </div>
+
+            <div id="logoutMessage" class="success-message" style="display: none;"></div>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" required placeholder="Masukkan username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" required placeholder="Masukkan password">
+                    </div>
+                </div>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Masuk
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>Belum punya akun? <a href="#" id="registerLink">Daftar sekarang</a></p>
+                <div class="demo-info">
+                    <small><strong>Akun Demo Tersedia:</strong></small><br>
+                    <small>1. admin / admin123</small><br>
+                    <small>2. binus / makangratis</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check for logout message
+        var logoutMessage = "<?php echo addslashes($logoutMessage); ?>";
+        if (logoutMessage) {
+            document.addEventListener("DOMContentLoaded", function() {
+                const logoutMsg = document.getElementById("logoutMessage");
+                logoutMsg.textContent = logoutMessage;
+                logoutMsg.style.display = "block";
+            });
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            const submitBtn = document.querySelector('.login-btn');
+
+            // Reset error message
+            errorMessage.style.display = 'none';
+            errorMessage.textContent = '';
+
+            // Disable button during submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+
+            // Try fetch with FormData for better compatibility
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+
+            fetch('login_process.php', {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin' // Include cookies
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error! status: ' + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
+
+                if (data.success) {
+                    // Show success message briefly before redirect
+                    errorMessage.textContent = 'Login berhasil! Mengalihkan...';
+                    errorMessage.className = 'success-message';
+                    errorMessage.style.display = 'block';
+
+                    // Redirect after short delay to ensure session is saved
+                    setTimeout(() => {
+                        window.location.replace('home.html');
+                    }, 1000);
+                } else {
+                    errorMessage.textContent = data.message || 'Login gagal';
+                    errorMessage.className = 'error-message';
+                    errorMessage.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Login error:', error);
+                // Re-enable button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Masuk';
+
+                errorMessage.textContent = 'Terjadi kesalahan koneksi. Silakan coba lagi.';
+                errorMessage.className = 'error-message';
+                errorMessage.style.display = 'block';
+            });
+        });
+
+        // Register link handler (for future implementation)
+        document.getElementById('registerLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Fitur pendaftaran akan segera hadir!');
+        });
+    </script>
+</body>
+</html>
