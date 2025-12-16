@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirect Test</title>
+</head>
+<body>
+    <h1>Testing Redirect</h1>
+    <button onclick="testRedirect()">Test Redirect to Home</button>
+    <div id="result"></div>
+
+    <script>
+        function testRedirect() {
+            document.getElementById('result').innerHTML = 'Redirecting...';
+            setTimeout(() => {
+                window.location.replace('home.html');
+            }, 500);
+        }
+    </script>
+</body>
+</html>

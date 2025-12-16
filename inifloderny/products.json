@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Kue Tradisional A",
+    "description": "Lezat dan manis, cocok untuk oleh-oleh.",
+    "image_url": "images/sample1.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Kue Tradisional B",
+    "description": "Rasa khas keluarga turun-temurun.",
+    "image_url": "images/sample2.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Kue Pandan",
+    "description": "Aroma pandan yang segar dan lembut.",
+    "image_url": "images/sample3.jpg"
+  }
+]

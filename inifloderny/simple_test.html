@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Login Test</title>
+</head>
+<body>
+    <h1>Simple Login Test</h1>
+    <form id="testForm">
+        <input type="text" id="testUsername" placeholder="Username" value="admin"><br><br>
+        <input type="password" id="testPassword" placeholder="Password" value="admin123"><br><br>
+        <button type="submit">Test Login</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('testUsername').value;
+            const password = document.getElementById('testPassword').value;
+            const result = document.getElementById('result');
+
+            result.innerHTML = 'Testing...';
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'login_process.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        result.innerHTML = '<pre>' + xhr.responseText + '</pre>';
+                    } else {
+                        result.innerHTML = 'Error: ' + xhr.status;
+                    }
+                }
+            };
+
+            xhr.send(`username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`);
+        });
+    </script>
+</body>
+</html>
