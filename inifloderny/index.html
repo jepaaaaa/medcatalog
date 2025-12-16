@@ -1,0 +1,107 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>Tentang MedCatalog</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="assets/css/styles.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <?php include 'auth_check.php'; ?>
+
+  <header>
+     <nav class="navbar">
+      <div class="logo">MedCatalog</div>
+      <ul class="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="allcategory.html">Products</a></li>
+        <li><a href="index.html">Contact</a></li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+   <div class="content-wrapper">
+    <section aria-label="About text content" class="text-content">
+     <h1>
+      Medical E-Catalog
+     </h1>
+     <p class="subheading">
+      jepa-jeri-jojo-jason
+     </p>
+     <p class="body-text">
+      MedCatalog adalah platform E-Catalog obat berbasis digital yang menyediakan berbagai katalog obat lengkap dengan penjelasan, indikasi, dan informasi penggunaan. Aplikasi ini dirancang untuk membantu pengguna dalam mencari dan memahami informasi obat secara mudah, cepat, dan terstruktur.
+     </p>
+     <p class="body-text">
+      Melalui MedCatalog, pengguna dapat melihat berbagai jenis obat mulai dari obat bebas, obat bebas terbatas, hingga produk perawatan kesehatan, dengan tampilan yang rapi dan konsisten. MedCatalog bertujuan menjadi sumber informasi obat yang praktis dan terpercaya.
+     <form>
+      <h3>
+       Contact us at 
+       medikal@gmail.com
+      </h3>
+    
+     </form>
+    </section>
+    <aside aria-label="Portrait of a man wearing a red beanie and dark jacket on red background" class="image-container">
+     <img alt="Portrait of a man wearing a red beanie and dark jacket on red background" height="350" src="images/jeri.jpeg" width="280"/>
+    </aside>
+   </div>
+  </main>
+  <footer>
+   <div class="footer-top">
+    <div class="footer-site-name">MedCatalog</div>
+    <div class="footer-links">
+      <div class="footer-topic">
+        <strong>Produk</strong>
+        <a href="home.html">Katalog</a>
+        <a href="allcategory.html">Kategori</a>
+        <a href="index.html">Tentang</a>
+      </div>
+      <div class="footer-topic">
+        <strong>Bantuan</strong>
+        <a href="#">FAQ</a>
+        <a href="#">Kontak</a>
+        <a href="#">Dukungan</a>
+      </div>
+      <div class="footer-topic">
+        <strong>Ikuti Kami</strong>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">Instagram</a>
+      </div>
+    </div>
+   </div>
+   <div aria-label="Social media links" class="footer-social">
+    <a aria-label="Facebook" href="#">
+     <i class="fab fa-facebook-f">
+     </i>
+    </a>
+    <a aria-label="LinkedIn" href="#">
+     <i class="fab fa-linkedin-in">
+     </i>
+    </a>
+    <a aria-label="YouTube" href="#">
+     <i class="fab fa-youtube">
+     </i>
+    </a>
+    <a aria-label="Instagram" href="#">
+     <i class="fab fa-instagram">
+     </i>
+    </a>
+   </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const findUsLink = document.getElementById("findUsLink");
+      if (findUsLink) {
+        findUsLink.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+  
+ </body>
+</html>
