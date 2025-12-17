@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedCatalog - E-Catalog Obat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">🏥 MedCatalog</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Selamat Datang di MedCatalog</h1>
+                <p>E-Catalog obat terpercaya untuk kebutuhan kesehatan Anda</p>
+                <a href="#products" class="btn-primary">Lihat Produk</a>
+            </div>
+        </section>
+
+        <section id="products" class="products-section">
+            <h2>Katalog Produk</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Kontak Kami</h2>
+            <p>Konsultasikan dengan dokter sebelum menggunakan obat</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 MedCatalog. Semua hak dilindungi.</p>
+    </footer>
+
+    <script>
+        // Sample products data (static version)
+        const products = [
+            { id: 1, name: 'Paracetamol', description: 'Obat pereda nyeri', price: 'Rp 15.000', image: 'assets/images/sanmol.png' },
+            { id: 2, name: 'Vicks', description: 'Obat batuk', price: 'Rp 10.990', image: 'assets/images/vicks.png' },
+            { id: 3, name: 'Rhinofed', description: 'Obat flu', price: 'Rp 18.250', image: 'assets/images/rhinofed.png' },
+            { id: 4, name: 'Insto', description: 'Obat mata', price: 'Rp 14.000', image: 'assets/images/insto.png' },
+            { id: 5, name: 'Betadine', description: 'Antiseptik', price: 'Rp 9.750', image: 'assets/images/betadine.png' }
+        ];
+
+        function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.description}</p>
+                    <p class="price">${product.price}</p>
+                    <button class="btn-secondary">Lihat Detail</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProducts);
+    </script>
+</body>
+</html>
